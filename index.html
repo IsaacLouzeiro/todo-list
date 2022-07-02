@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de afazeres</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <h2>Lista de Afazeres</h2>
+
+        <!--cabecalho-->
+        <div id="header">
+            <input type="text" id="inputTexto" v-model="itemInput">
+            <button type="button" id="inserir" @click="inserirItem()">+</button>
+        </div>
+        <!--lista-->
+        <ul id="toDoList">
+            <li id="lista" v-for="(item, index) in aLista" :key="index">
+                <span :id="`itemParaChecar${index}`">{{ item }}</span>
+                <div>
+                    <input type="checkbox" id="checarLista" title="Checar" @click="checarItem(`itemParaChecar${index}`)">
+                    <button type="button" id="excluir" @click="excluirItem(index)">X</button>
+                </div>
+            </li>
+        </ul>
+
+        <!--alerta-->
+        <div id="alerta"><span :class="alerta">{{ alertaMsg }}</span></div>
+    </div>
+
+
+    <!-- VUE 3 Local -->
+    <script src="assets/vue/vue.js"></script>
+
+    <!-- script de conteudo VUE -->
+    <script src="assets/vue/script.js"></script>
+</body>
+</html>

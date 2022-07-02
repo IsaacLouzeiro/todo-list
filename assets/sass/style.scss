@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS", sans-serif;
+    box-sizing: border-box;
+    border: none;
+}
+
+$color1: #1e272e;
+$color2: #57606f;
+$color3: #2c3e50;
+$color4: #d2dae2;
+
+$red: #ff4757;
+$green: #2ed573;
+
+body {
+    background-color: $color1;
+    color: $color4;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#app {
+    max-width: 350px;
+    padding: 5px 10px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+#header {
+    background-color: $color3;
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+
+    input {
+        font-size: 1.4em;
+        width: 80%;
+        margin-right: 2px;
+        padding: 3px 10px;
+        color: $color1;
+        
+        &:hover, &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        width: 20%;
+        margin-left: 2px;
+        font-size: 2em;
+        color: $color4;
+        background-color: $color2;
+        
+        &:hover {
+            cursor: pointer;
+            opacity: .7;
+        }
+    }
+}
+
+ul {
+    list-style-type: none;
+}
+
+#toDoList {
+    background-color: $color1;
+    padding: 10px 0;
+
+li {
+    background-color: $color2;
+    font-size: 1.1em;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    
+    span {
+        width: 80%;
+        word-wrap: break-word;
+        
+        &.itemParaChecar {
+            text-decoration: line-through;
+            opacity: .7;
+            transition: all .4s ease-in;
+        } 
+    }
+    
+    div {
+        display: flex;
+        align-items: center;
+        
+        #excluir {
+            background-color: $red;
+            padding: 3px 8px;
+            margin-left: 7px;
+            font-size: .9em;
+            color: $color2;
+            position: relative;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        #checarLista {
+            all: unset;
+            border: 2px solid $color4;
+            padding: 8px;
+            display: inline-block;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba($color1, .9);
+            }
+
+            &:checked {
+                background-color: $green;
+            }
+        }
+    }
+}
+}
+
+#alerta {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    span {
+        display: inline-block;
+        padding: 7px 15px;
+        transition: all .3s ease-in;
+        margin-left: 30%;
+        color: $color1;
+        
+        &.alertaSucesso, &.alertaErro {
+            margin-left: 0;
+        }
+
+        &.alertaSucesso {
+            background-color: $green;
+        }
+
+        &.alertaErro {
+            background-color: $red;
+        }
+    }
+}
