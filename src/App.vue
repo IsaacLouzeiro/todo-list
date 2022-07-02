@@ -1,3 +1,89 @@
+<template>
+    <div>
+        <h2>Lista de Afazeres</h2>
+    
+        <!--cabecalho-->
+        <div id="header">
+            <input type="text" id="inputTexto" v-model="itemInput">
+            <button type="button" id="inserir" @click="inserirItem()">+</button>
+        </div>
+        <!--lista-->
+        <ul id="toDoList">
+            <li id="lista" v-for="(item, index) in aLista" :key="index">
+                <span :id="`itemParaChecar${index}`">{{ item }}</span>
+                <div>
+                    <input type="checkbox" id="checarLista" title="Checar" @click="checarItem(`itemParaChecar${index}`)">
+                    <button type="button" id="excluir" @click="excluirItem(index)">X</button>
+                </div>
+            </li>
+        </ul>
+    
+        <!--alerta-->
+        <div id="alerta"><span :class="alerta">{{ alertaMsg }}</span></div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'App',
+    data() {
+        return {
+            itemInput: '',
+            aLista: [
+            'Criar um "To do List"'
+            ],
+
+            alerta: '',
+            alertaMsg: ''
+        }
+    },
+    methods: {
+        inserirItem() {
+            if((this.itemInput == '') || (this.itemInput == ' ')) {
+                this.alerta = 'alertaErro'
+                this.alertaMsg = 'Insira algo para ser adicionado.'
+
+                setInterval(() => {
+                    this.alerta = ''
+                    this.alertaMsg = ''
+                }, 3500)
+
+            }else {
+                this.aLista.push(this.itemInput)
+                this.itemInput = ''
+                this.alertaMsg = 'Item inserido com sucesso'
+                this.alerta = 'alertaSucesso'
+
+                setInterval(() => {
+                    this.alertaMsg = ''
+                    this.alerta = ''
+                }, 3500);
+            }
+        },
+
+        excluirItem(id) {
+            this.aLista.splice(id,1)
+            this.alertaMsg = 'Item removido com sucesso'
+            this.alerta = 'alertaSucesso'
+
+            setInterval(() => {
+                this.alertaMsg = ''
+                this.alerta = ''
+            }, 3500);
+        },
+
+        checarItem(id) {
+            document.getElementById(id).classList.toggle("itemParaChecar")
+        }
+    }
+
+}
+</script>
+
+<style lang="scss">
+@import '@/assets/color.scss';
+
+
 * {
     margin: 0;
     padding: 0;
@@ -5,14 +91,6 @@
     box-sizing: border-box;
     border: none;
 }
-
-$color1: #1e272e;
-$color2: #57606f;
-$color3: #2c3e50;
-$color4: #d2dae2;
-
-$red: #ff4757;
-$green: #2ed573;
 
 body {
     background-color: $color1;
@@ -31,7 +109,6 @@ body {
 h2 {
     margin-bottom: 10px;
     text-decoration: underline;
-    font-weight: 500;
 }
 
 #header {
@@ -156,3 +233,4 @@ li {
         }
     }
 }
+</style>
